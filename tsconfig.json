@@ -27,7 +27,7 @@
       "assets/*": ["src/types/assets.d.ts"]
     }
   },
-  "include": ["src/types"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules"],
   "extends": "@react-native/typescript-config/tsconfig.json"
 }
