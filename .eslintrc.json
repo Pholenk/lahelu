@@ -1,0 +1,17 @@
+{
+  "root": true,
+  "extends": ["@react-native", "plugins:sonarjs/recommended-legacy"],
+  "plugins": [
+    "eslint:recommended",
+    "react",
+    "react-native",
+    "@typescript-eslint",
+    "sonarjs"
+  ],
+  "rules": {
+    "no-duplicate-imports": "error",
+    "@typescript-eslint/no-unused-vars": "error",
+    "no-console": "error",
+    "sonarjs/cognitive-complexity": "error"
+  }
+}
