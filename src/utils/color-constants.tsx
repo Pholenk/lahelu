@@ -1,13 +1,5 @@
-const PRIMARY = '#55a4ff';
-const SECONDARY = '#525252';
-const PRIMARY_TEXT = SECONDARY;
-const DANGER_TEXT = '#fb5957';
-const WHITE = '#ffffff';
-
-export default {
-  PRIMARY,
-  SECONDARY,
-  PRIMARY_TEXT,
-  DANGER_TEXT,
-  WHITE,
-};
+export const PRIMARY = '#55a4ff';
+export const SECONDARY = '#525252';
+export const PRIMARY_TEXT = SECONDARY;
+export const DANGER_TEXT = '#fb5957';
+export const WHITE = '#ffffff';
