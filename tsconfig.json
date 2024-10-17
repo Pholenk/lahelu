@@ -1,23 +1,10 @@
 {
-  "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "nodenext",
-    "resolveJsonModule": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "ES2015",
-    "module": "nodenext",
-    "lib": ["es2020", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@data-layer": ["src/data-layer/index.tsx"],
-      "@data-layer/*": ["src/data-layer/*"],
+      "*": ["src/*"],
+      "@data-source": ["src/data-layer/index.tsx"],
+      "@data-source/*": ["src/data-layer/*"],
       "@navigation": ["src/navigation/index.tsx"],
       "@navigation/*": ["src/navigation/*"],
       "@ui": ["src/ui/index.tsx"],
@@ -27,7 +14,5 @@
       "assets/*": ["src/types/assets.d.ts"]
     }
   },
-  "include": ["src/types"],
-  "exclude": ["node_modules"],
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "extends": "@tsconfig/react-native/tsconfig.json"
 }
