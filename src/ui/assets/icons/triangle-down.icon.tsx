@@ -9,10 +9,11 @@ export const TriangleDownIcon: React.FC<IconProps> = ({
 }) => {
   return (
     <Svg
+      transform={[{ rotate: '180deg' }]}
       width={width}
       height={height}
       viewBox={`0 0 ${width} ${height}`}
-      testID="graphUpIcon"
+      testID="triangleDownIcon"
     >
       <Path
         fill={color}
