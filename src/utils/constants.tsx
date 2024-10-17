@@ -1,21 +1,15 @@
 export const TabHeader = [
   {
     name: 'Home',
-    key: 'home',
-    level: 0,
-    childOf: '',
+    id: 'home',
   },
   {
     name: 'Fresh',
-    key: 'fresh',
-    level: 0,
-    childOf: '',
+    id: 'fresh',
   },
   {
     name: 'Trending',
-    key: 'trending',
-    level: 0,
-    childOf: '',
+    id: 'trending',
   },
 ];
 
@@ -23,68 +17,48 @@ export const SidePanelMenu = [
   ...TabHeader,
   {
     name: 'Topik',
-    key: 'topic',
-    level: 0,
-    childOf: '',
+    id: 'topic',
   },
 ];
 
 export const SidePanelOther = [
   {
     name: 'Meme lain',
-    key: 'other',
-    level: 0,
-    childOf: '',
+    id: 'other',
   },
   {
     name: 'Peringkat',
-    key: 'rank',
-    level: 1,
-    childOf: 'other',
+    id: 'rank',
   },
   {
     name: 'Tersimpan',
-    key: 'saved',
-    level: 1,
-    childOf: 'other',
+    id: 'saved',
   },
   {
     name: 'Acak',
-    key: 'random',
-    level: 1,
-    childOf: 'other',
+    id: 'random',
   },
 ];
 
 export const SidePanelExplore = [
   {
     name: 'Jelajah',
-    key: 'explore',
-    level: 0,
-    childOf: '',
+    id: 'explore',
   },
   {
     name: 'Donatur',
-    key: 'donate',
-    level: 1,
-    childOf: 'explore',
+    id: 'donate',
   },
   {
     name: 'Medali',
-    key: 'achievement',
-    level: 1,
-    childOf: 'explore',
+    id: 'achievement',
   },
   {
     name: 'Toko Koin',
-    key: 'coin',
-    level: 1,
-    childOf: 'explore',
+    id: 'coin',
   },
   {
     name: 'Discord',
-    key: 'discord',
-    level: 1,
-    childOf: 'explore',
+    id: 'discord',
   },
 ];
