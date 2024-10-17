@@ -10,7 +10,11 @@ export const MainMenuPanel = (props: MainMenuPanelProps) => {
   return (
     <>
       {props?.menus?.map((menu) => (
-        <DrawerMainMenuItem {...menu} isActive={menu.id === props.activeMenu} />
+        <DrawerMainMenuItem
+          {...menu}
+          isActive={menu.id === props.activeMenu}
+          key={`${menu.id}`}
+        />
       ))}
     </>
   );
