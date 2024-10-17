@@ -3,3 +3,7 @@ export * from './home.icon';
 export * from './topics.icon';
 export * from './circle-plus.icon';
 export * from './profile.icon';
+export * from './clock.icon';
+export * from './graph-up.icon';
+export * from './triangle-down.icon';
+export * from './star.icon';
