@@ -1,4 +1,6 @@
-import { DrawerMainMenuItem, MenuItemProps, MenuProps } from '@ui';
+import { DrawerMenuItem, MenuItemProps, MenuProps } from '@ui';
+import { View } from 'react-native';
+import { MainMenuPanelStyle } from './main-menu-panel-style';
 
 type MainMenuPanelProps = {
   menus: MenuProps[];
@@ -8,14 +10,14 @@ type MainMenuPanelProps = {
 
 export const MainMenuPanel = (props: MainMenuPanelProps) => {
   return (
-    <>
+    <View style={MainMenuPanelStyle.container}>
       {props?.menus?.map((menu) => (
-        <DrawerMainMenuItem
+        <DrawerMenuItem
           {...menu}
           isActive={menu.id === props.activeMenu}
           key={`${menu.id}`}
         />
       ))}
-    </>
+    </View>
   );
 };
