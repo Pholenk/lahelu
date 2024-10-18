@@ -18,8 +18,9 @@ export const DrawerMenuItemStyle = StyleSheet.create({
   },
   labelActive: {
     color: WHITE,
+    fontWeight: '800',
   },
   icon: {
-    marginEnd: 8,
+    marginEnd: 16,
   },
 });
