@@ -1,2 +1,2 @@
 export * from './color-constants';
-export * from './constants';
+export * from './menu-constants';
