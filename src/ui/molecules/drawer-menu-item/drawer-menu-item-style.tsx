@@ -1,13 +1,13 @@
 import { StyleSheet } from 'react-native';
 import { PRIMARY, PRIMARY_TEXT, WHITE } from '@utils';
 
-export const MainMenuItemStyle = StyleSheet.create({
+export const DrawerMenuItemStyle = StyleSheet.create({
   button: {
     alignItems: 'center',
     justifyContent: 'flex-start',
     backgroundColor: WHITE,
     paddingHorizontal: 24,
-    paddingVertical: 8,
+    paddingVertical: 4,
   },
   buttonActive: {
     backgroundColor: PRIMARY,

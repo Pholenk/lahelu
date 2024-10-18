@@ -1,6 +1,6 @@
 import { ButtonIcon } from '@ui';
 import { useMemo } from 'react';
-import { MainMenuItemStyle } from './main-menu-item-style';
+import { DrawerMenuItemStyle } from './drawer-menu-item-style';
 
 export type MenuProps = {
   id: string;
@@ -13,20 +13,20 @@ export type MenuItemProps = {
   onPress?: (id: MenuProps['id']) => void;
 };
 
-export const DrawerMainMenuItem = (props: MenuItemProps & MenuProps) => {
+export const DrawerMenuItem = (props: MenuItemProps & MenuProps) => {
   const { id, label, icon, isActive, onPress } = props;
   const styles = useMemo(() => {
     const buttonStyle = props.isActive
-      ? { ...MainMenuItemStyle.button, ...MainMenuItemStyle.buttonActive }
-      : MainMenuItemStyle.button;
+      ? { ...DrawerMenuItemStyle.button, ...DrawerMenuItemStyle.buttonActive }
+      : DrawerMenuItemStyle.button;
     const labelStyle = props.isActive
-      ? { ...MainMenuItemStyle.label, ...MainMenuItemStyle.labelActive }
-      : MainMenuItemStyle.label;
+      ? { ...DrawerMenuItemStyle.label, ...DrawerMenuItemStyle.labelActive }
+      : DrawerMenuItemStyle.label;
 
     return {
       button: buttonStyle,
       label: labelStyle,
-      icon: MainMenuItemStyle.icon,
+      icon: DrawerMenuItemStyle.icon,
     };
   }, [props]);
 
