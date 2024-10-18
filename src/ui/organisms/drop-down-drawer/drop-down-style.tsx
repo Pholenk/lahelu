@@ -4,7 +4,7 @@ import { BORDER_COLOR, PRIMARY, PRIMARY_TEXT, WHITE } from '@utils';
 export const DropDownStyle = StyleSheet.create({
   container: {
     borderColor: BORDER_COLOR,
-    borderBottomWidth: 0.5,
+    borderTopWidth: 0.5,
     paddingVertical: 8,
   },
   header: {

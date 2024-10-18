@@ -15,10 +15,11 @@ import {
   MainMenuPanel,
   MedalIcon,
   RandomizedArrowIcon,
+  TopicExplorerPanel,
   TopicsIcon,
 } from '@ui';
 import { useCallback, useState } from 'react';
-import { SidePanelMenu, WHITE } from '@utils';
+import { SidePanelMenu, TopicExplorerMenu, WHITE } from '@utils';
 import { DropDownDrawer } from '../drop-down-drawer';
 import { DrawerMenuItem } from 'types/menu';
 
@@ -123,6 +124,7 @@ export const CustomSideDrawer = (props: DrawerContentComponentProps) => {
         label={SidePanelMenu.find((item) => item.id === 'explore')?.name ?? ''}
         activeMenu={activeMenu}
       />
+      <TopicExplorerPanel menus={TopicExplorerMenu} onPress={undefined} />
     </DrawerContentScrollView>
   );
 };

@@ -4,3 +4,9 @@ export type DrawerMenuItem = {
   level?: number;
   childOf?: DrawerMenuItem['id'];
 };
+
+export type DrawerMenuTopicExplorerItem = {
+  name: string;
+  id: string;
+  img?: string;
+};
