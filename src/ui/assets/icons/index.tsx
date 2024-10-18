@@ -11,3 +11,7 @@ export * from './triangle-up.icon';
 export * from './cup.icon';
 export * from './images.icon';
 export * from './randomized-arrow.icon';
+export * from './donate.icon';
+export * from './medal.icon';
+export * from './coin.icon';
+export * from './discord.icon';
