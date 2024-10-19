@@ -5,3 +5,5 @@ export const SECONDARY_TEXT = '#565656';
 export const DANGER_TEXT = '#fb5957';
 export const WHITE = '#ffffff';
 export const BORDER_COLOR = '#e0e0e0';
+export const BACKGROUND = '#f1f1f1';
+export const GOLD = '#e99e2d';
