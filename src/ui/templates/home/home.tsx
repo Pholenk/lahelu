@@ -1,6 +1,13 @@
 import { FlatList, View, ViewToken } from 'react-native';
-import { HeaderTab, MediaDisplay, PostPanel } from '@ui';
-import { useRef, useState } from 'react';
+import { HeaderTab, MediaDisplay, PostPanel, PostPanelProps } from '@ui';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import {
+  AppRootState,
+  fetchFeedPosts,
+  useAppDispatch,
+  useAppSelector,
+} from '@data-source';
+import { PostInfo } from '@data-source/rtk/feeds/feeds.types';
 
 const mockPost = [
   {
@@ -29,11 +36,56 @@ type OnItemViewableItemsChangedType = {
 };
 
 export const HomeTemplate = () => {
+  const dispatch = useAppDispatch();
   const TabsTitle = ['Home', 'Fresh', 'Trending'];
   const [activeTab, setActiveTab] = useState(TabsTitle[0]);
   const [visibleItems, setVisibleItems] = useState([]);
-
+  const [postFeeds, setPostFeeds] = useState<PostPanelProps[]>([]);
+  const { homeFeeds, freshFeeds, trendingFeeds } = useAppSelector(
+    (state: AppRootState) => state.feeds,
+  );
+  const postByTabs: Record<string, PostInfo[]> = useMemo(
+    () => ({
+      Home: homeFeeds.postInfos || [],
+      Fresh: freshFeeds.postInfos || [],
+      Trending: trendingFeeds.postInfos || [],
+    }),
+    [homeFeeds, freshFeeds, trendingFeeds],
+  );
+  const nextPageByTabs: Record<string, number> = useMemo(
+    () => ({
+      Home: homeFeeds.nextPage || 0,
+      Fresh: freshFeeds.nextPage || 0,
+      Trending: trendingFeeds.nextPage || 0,
+    }),
+    [homeFeeds, freshFeeds, trendingFeeds],
+  );
+  const hasMoreByTabs: Record<string, boolean> = useMemo(
+    () => ({
+      Home: homeFeeds.hasMore || true,
+      Fresh: freshFeeds.hasMore || true,
+      Trending: trendingFeeds.hasMore || true,
+    }),
+    [homeFeeds, freshFeeds, trendingFeeds],
+  );
   const mediaControls = useRef<MediaDisplay[]>([]);
+
+  const fetchNextPage = () => {
+    const tabIndex = TabsTitle.findIndex((tab) => tab === activeTab) + 1;
+    dispatch(
+      fetchFeedPosts({
+        id: tabIndex,
+        page: nextPageByTabs[activeTab],
+      }),
+    );
+  };
+
+  const onEndReachedHandler = () => {
+    const hasMore = hasMoreByTabs[activeTab];
+    if (hasMore) {
+      fetchNextPage();
+    }
+  };
 
   const onViewableItemsChangedHandler = ({
     viewableItems,
@@ -47,7 +99,13 @@ export const HomeTemplate = () => {
     );
   };
 
-  const renderPostItem = ({ item, index }) => {
+  const renderPostItem = ({
+    item,
+    index,
+  }: {
+    item: PostPanelProps;
+    index: number;
+  }) => {
     return (
       <PostPanel
         {...item}
@@ -59,6 +117,30 @@ export const HomeTemplate = () => {
     );
   };
 
+  useEffect(() => {
+    fetchNextPage();
+  }, [activeTab]);
+
+  useEffect(() => {
+    const newPostFeeds = postByTabs[activeTab].map((post) => {
+      if (post.mediaType === 0) {
+        console.log(post.media);
+      }
+      return {
+        avatar: { uri: post.userAvatar },
+        username: post.userUsername,
+        title: post.title,
+        source: { uri: post.media },
+        hashtags: post.hashtags,
+        upVote: post.totalUpvotes,
+        comment: post.totalComments,
+        isVideo: post.mediaType === 1,
+      };
+    }) as PostPanelProps[];
+
+    setPostFeeds(newPostFeeds);
+  }, [homeFeeds, freshFeeds, trendingFeeds]);
+
   return (
     <View>
       <HeaderTab
@@ -67,13 +149,15 @@ export const HomeTemplate = () => {
         onPress={setActiveTab}
       />
       <FlatList
-        data={mockPost}
+        data={postFeeds}
         keyExtractor={(_item, index) => index.toString()}
         onViewableItemsChanged={onViewableItemsChangedHandler}
         pagingEnabled
         renderItem={renderPostItem}
         snapToAlignment="start"
         viewabilityConfig={{ itemVisiblePercentThreshold: 45 }}
+        onEndReached={onEndReachedHandler}
+        onEndReachedThreshold={0.5}
       />
     </View>
   );

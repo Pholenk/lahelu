@@ -10,7 +10,7 @@ import {
 } from '@ui';
 import { PostOptionsConstant } from '@utils';
 
-type PostPanelProps = {
+export type PostPanelProps = {
   avatar: ImageSourcePropType;
   username: string;
   title: string;
@@ -18,10 +18,14 @@ type PostPanelProps = {
   hashtags: string[];
   upVote: number;
   comment: number;
+  isVideo: boolean;
 };
 
 export const PostPanel = forwardRef<MediaDisplay, PostPanelProps>(
-  ({ avatar, username, title, source, hashtags, upVote, comment }, ref) => {
+  (
+    { avatar, username, title, source, hashtags, upVote, comment, isVideo },
+    ref,
+  ) => {
     return (
       <View style={PostPanelStyle.container}>
         <View style={[PostPanelStyle.headerWrapper, PostPanelStyle.row]}>
@@ -37,7 +41,7 @@ export const PostPanel = forwardRef<MediaDisplay, PostPanelProps>(
           <View style={PostPanelStyle.titleBox}>
             <Text style={PostPanelStyle.title}>{title}</Text>
           </View>
-          <MediaDisplay isVideo={true} source={source} ref={ref} />
+          <MediaDisplay isVideo={isVideo} source={source} ref={ref} />
         </View>
         <View style={PostPanelStyle.footerWrapper}>
           <PostHashtagCollections hashtags={hashtags} />

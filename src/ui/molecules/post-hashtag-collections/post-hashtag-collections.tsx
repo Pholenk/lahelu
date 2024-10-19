@@ -41,6 +41,7 @@ export const PostHashtagCollections: FC<PostHashtagCollectionsProps> = ({
       horizontal
       style={HashtagCollectionsStyle.container}
       contentContainerStyle={HashtagCollectionsStyle.contentContainer}
+      showsHorizontalScrollIndicator={false}
     >
       {['Sawer', ...hashtags].map((hashtag) => (
         <HashtagButton hashtag={hashtag} key={hashtag} />

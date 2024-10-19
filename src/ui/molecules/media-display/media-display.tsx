@@ -26,11 +26,19 @@ export const MediaDisplay = forwardRef<MediaDisplay, MediaDisplayProps>(
     const [isPaused, setIsPaused] = useState(true);
     const { height, width } = useMediaDimensions();
     const zoomableViewRef = useRef<ReactNativeZoomableView>(null);
+    const imageStyles = { height, width };
 
-    useImperativeHandle(ref, () => ({
-      play: () => setIsPaused(false),
-      pause: () => setIsPaused(true),
-    }));
+    useImperativeHandle(ref, () => {
+      return isVideo
+        ? {
+            play: () => setIsPaused(false),
+            pause: () => setIsPaused(true),
+          }
+        : {
+            play: () => {},
+            pause: () => {},
+          };
+    });
 
     const handleZoomEnd = () => {
       if (zoomableViewRef?.current) {
@@ -56,7 +64,7 @@ export const MediaDisplay = forwardRef<MediaDisplay, MediaDisplayProps>(
             {isVideo ? (
               <VideoPlayer isPaused={isPaused} source={source} />
             ) : (
-              <Image source={source} style={{}} resizeMode="contain" />
+              <Image source={source} style={imageStyles} resizeMode="contain" />
             )}
           </ReactNativeZoomableView>
         </View>

@@ -17,10 +17,10 @@ import {
   RandomizedArrowIcon,
   TopicExplorerPanel,
   TopicsIcon,
+  DropDownDrawer,
 } from '@ui';
 import { useCallback, useState } from 'react';
 import { SidePanelMenu, TopicExplorerMenu, WHITE } from '@utils';
-import { DropDownDrawer } from '../drop-down-drawer';
 import { DrawerMenuItem } from 'types/menu';
 
 const menuIcons: {
