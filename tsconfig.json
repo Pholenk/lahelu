@@ -2,7 +2,6 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "*": ["src/*"],
       "@data-source": ["src/data-layer/index.tsx"],
       "@data-source/*": ["src/data-layer/*"],
       "@navigation": ["src/navigation/index.tsx"],
@@ -11,6 +10,7 @@
       "@ui/*": ["src/ui/*"],
       "@utils": ["src/utils/index.tsx"],
       "@utils/*": ["src/utils/*"],
+      "@types/*": ["src/types/*"],
       "assets/*": ["src/types/assets.d.ts"]
     }
   },

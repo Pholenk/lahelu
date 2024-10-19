@@ -1,7 +1,7 @@
 import { ColorValue, ViewStyle } from 'react-native';
 
 export interface IconProps {
-  width?: number | string;
+  width?: number;
   height?: number;
   color?: ColorValue;
   style?: ViewStyle;
