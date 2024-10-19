@@ -1,6 +1,7 @@
 import { ReactNode, useMemo } from 'react';
 import {
   ImageStyle,
+  StyleProp,
   Text,
   TextStyle,
   TouchableOpacity,
@@ -10,8 +11,8 @@ import {
 import { ButtonIconStyle } from './button-icon-style';
 
 type ButtonIconStyleProps = {
-  button?: ViewStyle;
-  label?: TextStyle;
+  button?: StyleProp<ViewStyle>;
+  label?: StyleProp<TextStyle>;
   icon?: ViewStyle | ImageStyle;
 };
 type ButtonIconProps = {
@@ -25,12 +26,12 @@ type ButtonIconProps = {
 export const ButtonIcon = (props: ButtonIconProps) => {
   const styles = useMemo(() => {
     return {
-      button: {
-        ...ButtonIconStyle.container,
-        ...props?.style?.button,
-        ...ButtonIconStyle.row,
-      },
-      label: { ...props?.style?.label },
+      button: [
+        ButtonIconStyle.container,
+        props?.style?.button,
+        ButtonIconStyle.row,
+      ],
+      label: props?.style?.label,
       icon: { ...props?.style?.icon },
     };
   }, [props?.style]);
