@@ -9,9 +9,7 @@
       "@ui": ["src/ui/index.tsx"],
       "@ui/*": ["src/ui/*"],
       "@utils": ["src/utils/index.tsx"],
-      "@utils/*": ["src/utils/*"],
-      "@types/*": ["src/types/*"],
-      "assets/*": ["src/types/assets.d.ts"]
+      "@utils/*": ["src/utils/*"]
     }
   },
   "extends": "@tsconfig/react-native/tsconfig.json"

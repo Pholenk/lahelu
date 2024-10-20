@@ -27,8 +27,13 @@ import {
   useActiveHomeTab,
   WHITE,
 } from '@utils';
-import { DrawerMenuItem } from 'types/menu';
 
+type DrawerMenuItem = {
+  name: string;
+  id: string;
+  level?: number;
+  childOf?: DrawerMenuItem['id'];
+};
 const MENU_CATEGORY = {
   main: 'MAIN_MENU',
   other: 'OTHER_MENU',

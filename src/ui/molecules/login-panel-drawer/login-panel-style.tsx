@@ -5,7 +5,7 @@ import {
   PRIMARY_TEXT,
   SECONDARY_TEXT,
   WHITE,
-} from 'utils';
+} from '@utils';
 
 export const LoginPanelStyle = StyleSheet.create({
   container: {
