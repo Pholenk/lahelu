@@ -3,7 +3,7 @@ import Reducers from './reducers';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const Store = configureStore({
-  reducer: {},
+  reducer: Reducers,
 });
 
 export type AppRootState = ReturnType<typeof Store.getState>;

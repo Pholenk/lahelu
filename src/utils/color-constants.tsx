@@ -7,3 +7,4 @@ export const WHITE = '#ffffff';
 export const BORDER_COLOR = '#e0e0e0';
 export const BACKGROUND = '#f1f1f1';
 export const GOLD = '#e99e2d';
+export const HEADER_TEXT_SHADOW = '#aad5f1';
