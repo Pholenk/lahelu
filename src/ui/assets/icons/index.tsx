@@ -29,3 +29,5 @@ export * from './mute.icon';
 export * from './unmute.icon';
 export * from './hashtag.icon';
 export * from './share.icon';
+export * from './hamburger.icon';
+export * from './find.icon';
