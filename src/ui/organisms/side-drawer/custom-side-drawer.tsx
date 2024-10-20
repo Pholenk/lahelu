@@ -17,12 +17,24 @@ import {
   RandomizedArrowIcon,
   TopicExplorerPanel,
   TopicsIcon,
+  DropDownDrawer,
+  MenuProps,
 } from '@ui';
-import { useCallback, useState } from 'react';
-import { SidePanelMenu, TopicExplorerMenu, WHITE } from '@utils';
-import { DropDownDrawer } from '../drop-down-drawer';
+import { useCallback, useEffect, useState } from 'react';
+import {
+  SidePanelMenu,
+  TopicExplorerMenu,
+  useActiveHomeTab,
+  WHITE,
+} from '@utils';
 import { DrawerMenuItem } from 'types/menu';
 
+const MENU_CATEGORY = {
+  main: 'MAIN_MENU',
+  other: 'OTHER_MENU',
+  explore: 'EXPLORE_MENU',
+  topicExplorer: 'TOPIC_EXPLORER_MENU',
+};
 const menuIcons: {
   [K: string]: { active: React.JSX.Element; default: React.JSX.Element };
 } = {
@@ -73,7 +85,35 @@ const menuIcons: {
 };
 
 export const CustomSideDrawer = (props: DrawerContentComponentProps) => {
+  const [activeHomeTab, setHomeTab] = useActiveHomeTab();
   const [activeMenu, setActiveMenu] = useState('home');
+
+  const getSelectedMenu = useCallback(() => {
+    return SidePanelMenu.find((menu) => menu.name === activeHomeTab);
+  }, [activeHomeTab]);
+
+  useEffect(() => {
+    const selectedMenu = getSelectedMenu();
+    if (selectedMenu?.id) {
+      setActiveMenu(selectedMenu.id);
+    }
+  }, [activeHomeTab]);
+
+  const handleOnPress = (category: string, id: MenuProps['id']) => {
+    switch (category) {
+      case MENU_CATEGORY.main: {
+        const selectedMenu = getSelectedMenu();
+        if (selectedMenu?.name) {
+          setHomeTab(selectedMenu?.name);
+        }
+        break;
+      }
+      default: {
+        () => {};
+        break;
+      }
+    }
+  };
 
   const mainMenus = useCallback(() => {
     return [...SidePanelMenu]
@@ -112,7 +152,7 @@ export const CustomSideDrawer = (props: DrawerContentComponentProps) => {
       <MainMenuPanel
         menus={mainMenus()}
         activeMenu={activeMenu}
-        onPress={undefined}
+        onPress={(id: MenuProps['id']) => handleOnPress(MENU_CATEGORY.main, id)}
       />
       <DropDownDrawer
         items={dropDownMenus(SidePanelMenu, 'other')}
