@@ -1,5 +1,5 @@
 export type FeedRequest = {
-  id: number;
+  feed: number;
   page: number;
 };
 

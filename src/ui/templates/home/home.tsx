@@ -1,6 +1,6 @@
 import { FlatList, View, ViewToken } from 'react-native';
 import { HeaderTab, MediaDisplay, PostPanel, PostPanelProps } from '@ui';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   AppRootState,
   fetchFeedPosts,
@@ -50,7 +50,7 @@ export const HomeTemplate = () => {
       Fresh: freshFeeds.postInfos || [],
       Trending: trendingFeeds.postInfos || [],
     }),
-    [homeFeeds, freshFeeds, trendingFeeds],
+    [homeFeeds.postInfos, freshFeeds.postInfos, trendingFeeds.postInfos],
   );
   const nextPageByTabs: Record<string, number> = useMemo(
     () => ({
@@ -58,7 +58,7 @@ export const HomeTemplate = () => {
       Fresh: freshFeeds.nextPage || 0,
       Trending: trendingFeeds.nextPage || 0,
     }),
-    [homeFeeds, freshFeeds, trendingFeeds],
+    [homeFeeds.nextPage, freshFeeds.nextPage, trendingFeeds.nextPage],
   );
   const hasMoreByTabs: Record<string, boolean> = useMemo(
     () => ({
@@ -66,26 +66,58 @@ export const HomeTemplate = () => {
       Fresh: freshFeeds.hasMore || true,
       Trending: trendingFeeds.hasMore || true,
     }),
-    [homeFeeds, freshFeeds, trendingFeeds],
+    [homeFeeds.hasMore, freshFeeds.hasMore, trendingFeeds.hasMore],
   );
   const mediaControls = useRef<MediaDisplay[]>([]);
 
-  const fetchNextPage = () => {
-    const tabIndex = TabsTitle.findIndex((tab) => tab === activeTab) + 1;
+  const fetchNextPage = useCallback(() => {
+    const tabIndex = TabsTitle.findIndex((tab) => tab === activeTab);
     dispatch(
       fetchFeedPosts({
-        id: tabIndex,
+        feed: tabIndex,
         page: nextPageByTabs[activeTab],
       }),
     );
-  };
+  }, [dispatch, activeTab]);
 
-  const onEndReachedHandler = () => {
+  const populatePostAsPostPanelProps = useCallback(() => {
+    const posts = postByTabs[activeTab].map((post) => {
+      return {
+        avatar: { uri: post.userAvatar },
+        username: post.userUsername,
+        title: post.title,
+        source: { uri: post.media },
+        hashtags: post.hashtags,
+        upVote: post.totalUpvotes,
+        comment: post.totalComments,
+        isVideo: post.mediaType === 1,
+      };
+    }) as PostPanelProps[];
+    return posts;
+  }, [activeTab, postByTabs]);
+
+  const onChangeTab = useCallback(
+    (key: string) => {
+      setActiveTab(key);
+      setPostFeeds([]);
+      const isFirstLoad = nextPageByTabs[key] === 1;
+
+      if (isFirstLoad) {
+        fetchNextPage();
+      } else {
+        const feedPosts = populatePostAsPostPanelProps();
+        setPostFeeds(feedPosts);
+      }
+    },
+    [fetchNextPage],
+  );
+
+  const onEndReachedHandler = useCallback(() => {
     const hasMore = hasMoreByTabs[activeTab];
     if (hasMore) {
       fetchNextPage();
     }
-  };
+  }, [activeTab, fetchNextPage]);
 
   const onViewableItemsChangedHandler = ({
     viewableItems,
@@ -119,34 +151,26 @@ export const HomeTemplate = () => {
 
   useEffect(() => {
     fetchNextPage();
-  }, [activeTab]);
+  }, [activeTab, fetchNextPage]);
 
   useEffect(() => {
-    const newPostFeeds = postByTabs[activeTab].map((post) => {
-      if (post.mediaType === 0) {
-        console.log(post.media);
-      }
-      return {
-        avatar: { uri: post.userAvatar },
-        username: post.userUsername,
-        title: post.title,
-        source: { uri: post.media },
-        hashtags: post.hashtags,
-        upVote: post.totalUpvotes,
-        comment: post.totalComments,
-        isVideo: post.mediaType === 1,
-      };
-    }) as PostPanelProps[];
+    const feedPosts = populatePostAsPostPanelProps();
+    console.log(feedPosts, homeFeeds.postInfos, '<<<<<<<<<<< feedPosts');
 
-    setPostFeeds(newPostFeeds);
-  }, [homeFeeds, freshFeeds, trendingFeeds]);
+    setPostFeeds(feedPosts);
+  }, [
+    homeFeeds.postInfos,
+    freshFeeds.postInfos,
+    trendingFeeds.postInfos,
+    populatePostAsPostPanelProps,
+  ]);
 
   return (
     <View>
       <HeaderTab
         labels={TabsTitle}
         activeTab={activeTab}
-        onPress={setActiveTab}
+        onPress={onChangeTab}
       />
       <FlatList
         data={postFeeds}

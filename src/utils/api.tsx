@@ -29,11 +29,13 @@ export async function API<T>(
       const queryParams = [];
       for (let i = 0; i < paramKeys.length; i++) {
         queryParams.push(`${paramKeys[i]}=${requestParams[paramKeys[i]]}`);
-        url += encodeURI(`?${queryParams.join('&')}`);
       }
+      url += encodeURI(`?${queryParams.join('&')}`);
 
       delete fetchRequest.body;
     }
+
+    console.log(url, '<<<<<<<<< url');
 
     const response = await fetch(url, fetchRequest);
     result.code = response.status;

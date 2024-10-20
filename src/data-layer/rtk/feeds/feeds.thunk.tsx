@@ -17,11 +17,15 @@ export const fetchFeedPosts = createAsyncThunk<
       payload,
     );
 
+    console.log(payload, '<<<<<<<<< payload');
+    console.log(response, '<<<<<<<<< response');
+
     return {
       ...response,
-      id: payload.id,
+      id: payload.feed,
     };
   } catch (e) {
+    console.log(e, '<<<<<<<<< error');
     return thunkAPI.rejectWithValue(e);
   }
 });

@@ -39,40 +39,34 @@ export const feeds = createSlice({
         delete payload.postInfos;
 
         switch (payload.id) {
-          case 1:
+          case 0:
             state.homeFeeds = {
               ...payload,
-              postInfos: [
-                ...combinePostInfo(
-                  state.homeFeeds ?? [],
-                  postInfosResponse,
-                  payload.nextPage,
-                ),
-              ],
+              postInfos: combinePostInfo(
+                state.homeFeeds ?? {},
+                postInfosResponse,
+                payload.nextPage,
+              ),
+            };
+            break;
+          case 1:
+            state.freshFeeds = {
+              ...payload,
+              postInfos: combinePostInfo(
+                state.freshFeeds ?? {},
+                postInfosResponse,
+                payload.nextPage,
+              ),
             };
             break;
           case 2:
-            state.freshFeeds = {
-              ...payload,
-              postInfos: [
-                ...combinePostInfo(
-                  state.freshFeeds ?? [],
-                  postInfosResponse,
-                  payload.nextPage,
-                ),
-              ],
-            };
-            break;
-          case 3:
             state.trendingFeeds = {
               ...payload,
-              postInfos: [
-                ...combinePostInfo(
-                  state.trendingFeeds ?? [],
-                  postInfosResponse,
-                  payload.nextPage,
-                ),
-              ],
+              postInfos: combinePostInfo(
+                state.trendingFeeds ?? {},
+                postInfosResponse,
+                payload.nextPage,
+              ),
             };
             break;
           default:
