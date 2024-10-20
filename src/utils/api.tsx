@@ -35,8 +35,6 @@ export async function API<T>(
       delete fetchRequest.body;
     }
 
-    console.log(url, '<<<<<<<<< url');
-
     const response = await fetch(url, fetchRequest);
     result.code = response.status;
 

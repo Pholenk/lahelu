@@ -155,7 +155,6 @@ export const HomeTemplate = () => {
 
   useEffect(() => {
     const feedPosts = populatePostAsPostPanelProps();
-    console.log(feedPosts, homeFeeds.postInfos, '<<<<<<<<<<< feedPosts');
 
     setPostFeeds(feedPosts);
   }, [
