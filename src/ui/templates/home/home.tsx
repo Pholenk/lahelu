@@ -4,31 +4,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   AppRootState,
   fetchFeedPosts,
+  setActiveTab,
   useAppDispatch,
   useAppSelector,
 } from '@data-source';
 import { PostInfo } from '@data-source/rtk/feeds/feeds.types';
-
-const mockPost = [
-  {
-    avatar: { uri: 'https://cache.lahelu.com/avatar-UCUx7hYrJ-94089' },
-    username: 'aku_jawir_asik_1',
-    title: 'Satoru vincent vs homeless ryomen',
-    hashtags: ['anime', 'vincent', 'kocak'],
-    upVote: 6,
-    comment: 10,
-    source: { uri: 'https://cache.lahelu.com/video-PGAd1nPmU-57693' },
-  },
-  {
-    avatar: { uri: 'https://cache.lahelu.com/avatar-UK1gJKhXB-50102' },
-    username: 'aku_jawir_asik_2',
-    title: 'Satoru vincent vs homeless ryomen',
-    hashtags: ['anime', 'vincent', 'kocak'],
-    upVote: 6,
-    comment: 10,
-    source: { uri: 'https://cache.lahelu.com/video-PZQzP18l8-37093' },
-  },
-];
 
 type OnItemViewableItemsChangedType = {
   viewableItems: ViewToken[];
@@ -38,10 +18,8 @@ type OnItemViewableItemsChangedType = {
 export const HomeTemplate = () => {
   const dispatch = useAppDispatch();
   const TabsTitle = ['Home', 'Fresh', 'Trending'];
-  const [activeTab, setActiveTab] = useState(TabsTitle[0]);
-  const [visibleItems, setVisibleItems] = useState([]);
   const [postFeeds, setPostFeeds] = useState<PostPanelProps[]>([]);
-  const { homeFeeds, freshFeeds, trendingFeeds } = useAppSelector(
+  const { homeFeeds, freshFeeds, trendingFeeds, activeTab } = useAppSelector(
     (state: AppRootState) => state.feeds,
   );
   const postByTabs: Record<string, PostInfo[]> = useMemo(
@@ -98,7 +76,7 @@ export const HomeTemplate = () => {
 
   const onChangeTab = useCallback(
     (key: string) => {
-      setActiveTab(key);
+      dispatch(setActiveTab(key));
       setPostFeeds([]);
       const isFirstLoad = nextPageByTabs[key] === 1;
 

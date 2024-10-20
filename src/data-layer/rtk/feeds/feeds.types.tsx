@@ -37,6 +37,7 @@ export type PostInfo = {
 
 export type FeedsInitialState = {
   isLoading: boolean;
+  activeTab: string;
   homeFeeds: FeedsResponse;
   freshFeeds: FeedsResponse;
   trendingFeeds: FeedsResponse;

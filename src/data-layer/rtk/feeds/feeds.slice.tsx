@@ -24,6 +24,9 @@ export const feeds = createSlice({
   name: 'feeds',
   initialState: FeedsInitialState,
   reducers: {
+    setActiveTab: (state, action: PayloadAction<string>) => {
+      state.activeTab = action.payload;
+    },
     resetHomeFeeds: (state) => {
       state = FeedsInitialState;
     },
@@ -77,5 +80,5 @@ export const feeds = createSlice({
   },
 });
 
-export const { resetHomeFeeds } = feeds.actions;
+export const { setActiveTab, resetHomeFeeds } = feeds.actions;
 export const feedsReducer = feeds.reducer;

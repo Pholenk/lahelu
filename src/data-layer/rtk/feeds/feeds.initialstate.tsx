@@ -2,6 +2,7 @@ import type * as FeedsState from './feeds.types';
 
 export const FeedsInitialState: FeedsState.FeedsInitialState = {
   isLoading: false,
+  activeTab: 'Home',
   homeFeeds: {
     id: 1,
     postInfos: [],
