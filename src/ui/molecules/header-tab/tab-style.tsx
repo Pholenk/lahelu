@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { BORDER_COLOR, PRIMARY, PRIMARY_TEXT, WHITE } from 'utils';
+import { BORDER_COLOR, PRIMARY, PRIMARY_TEXT, WHITE } from '@utils';
 
 const TabStyle = StyleSheet.create({
   container: {

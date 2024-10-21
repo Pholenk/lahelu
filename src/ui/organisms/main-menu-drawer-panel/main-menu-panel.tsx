@@ -9,6 +9,12 @@ type MainMenuPanelProps = {
 };
 
 export const MainMenuPanel = (props: MainMenuPanelProps) => {
+  const onPressHandler: MenuItemProps['onPress'] = (id) => {
+    if (typeof props?.onPress === 'function') {
+      props?.onPress(id);
+    }
+  };
+
   return (
     <View style={MainMenuPanelStyle.container}>
       {props?.menus?.map((menu) => (
@@ -16,6 +22,7 @@ export const MainMenuPanel = (props: MainMenuPanelProps) => {
           {...menu}
           isActive={menu.id === props.activeMenu}
           key={`${menu.id}`}
+          onPress={onPressHandler}
         />
       ))}
     </View>
