@@ -102,6 +102,7 @@ export const CustomSideDrawer = (props: DrawerContentComponentProps) => {
     if (selectedMenu?.id) {
       setActiveMenu(selectedMenu.id);
     }
+    props.navigation.toggleDrawer();
   }, [activeHomeTab]);
 
   const handleOnPress = (category: string, id: MenuProps['id']) => {
@@ -152,7 +153,7 @@ export const CustomSideDrawer = (props: DrawerContentComponentProps) => {
   );
 
   return (
-    <DrawerContentScrollView {...props}>
+    <DrawerContentScrollView {...props} testID="DrawerScreen">
       <LoginPanel />
       <MainMenuPanel
         menus={mainMenus()}
