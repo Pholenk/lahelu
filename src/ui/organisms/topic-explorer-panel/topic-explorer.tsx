@@ -1,7 +1,12 @@
-import { ButtonIcon, DrawerMenuItem, StarIcon } from '@ui';
+import { ButtonIcon, StarIcon } from '@ui';
 import { Image, Text, View } from 'react-native';
 import { TopicExplorerStyle } from './topic-explorer-style';
-import { DrawerMenuTopicExplorerItem } from 'types/menu';
+
+export type DrawerMenuTopicExplorerItem = {
+  name: string;
+  id: string;
+  img?: string;
+};
 
 type TopicExplorerPanelProps = {
   menus: DrawerMenuTopicExplorerItem[];
