@@ -161,7 +161,6 @@ describe('Home Test Suite', () => {
 
     await act(async () => {
       const homeTab = await screen.findByTestId('button-tab-Home');
-      // fireEvent(homeTab, 'click');
       expect(homeTab).toBeOnTheScreen();
 
       const ellipsisIcons = await screen.findAllByTestId('elipsisIcon');
