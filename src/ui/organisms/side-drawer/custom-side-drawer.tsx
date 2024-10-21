@@ -93,24 +93,23 @@ export const CustomSideDrawer = (props: DrawerContentComponentProps) => {
   const [activeHomeTab, setHomeTab] = useActiveHomeTab();
   const [activeMenu, setActiveMenu] = useState('home');
 
-  const getSelectedMenu = useCallback(() => {
-    return SidePanelMenu.find((menu) => menu.name === activeHomeTab);
-  }, [activeHomeTab]);
-
   useEffect(() => {
-    const selectedMenu = getSelectedMenu();
+    const selectedMenu = SidePanelMenu.find(
+      (menu) => menu.name === activeHomeTab,
+    );
     if (selectedMenu?.id) {
       setActiveMenu(selectedMenu.id);
     }
-    props.navigation.toggleDrawer();
   }, [activeHomeTab]);
 
   const handleOnPress = (category: string, id: MenuProps['id']) => {
     switch (category) {
       case MENU_CATEGORY.main: {
-        const selectedMenu = getSelectedMenu();
+        const selectedMenu = SidePanelMenu.find((menu) => menu.id === id);
+
         if (selectedMenu?.name) {
           setHomeTab(selectedMenu?.name);
+          props.navigation.toggleDrawer();
         }
         break;
       }
