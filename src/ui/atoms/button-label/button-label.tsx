@@ -8,6 +8,7 @@ type ButtonLabelProps = {
   label: string;
   onPress?: () => void;
   style?: ButtonLabelStyle;
+  testId?: string;
 };
 
 export const ButtonLabel = (props: ButtonLabelProps) => {
@@ -22,7 +23,11 @@ export const ButtonLabel = (props: ButtonLabelProps) => {
   };
 
   return (
-    <TouchableOpacity style={buttonStyle} onPress={onPressHandler}>
+    <TouchableOpacity
+      style={buttonStyle}
+      onPress={onPressHandler}
+      testID={props?.testId}
+    >
       <Text style={labelStyle}>{label}</Text>
     </TouchableOpacity>
   );
