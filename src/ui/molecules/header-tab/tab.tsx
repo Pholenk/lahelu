@@ -38,6 +38,7 @@ export const HeaderTab = (props: HeaderTabProps) => {
           label={label}
           onPress={() => onTabPressHandler(label)}
           key={`tab-${label}${index}`}
+          testId={`button-tab-${label}`}
           style={{
             button: buttonStyle,
             label: labelStyle,

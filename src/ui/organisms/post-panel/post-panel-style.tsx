@@ -5,11 +5,8 @@ const { width: screenWidth } = Dimensions.get('screen');
 
 export const PostPanelStyle = StyleSheet.create({
   container: {
-    // backgroundColor: BACKGROUND,
-    // backgroundColor: WHITE,
     justifyContent: 'center',
     marginBottom: 8,
-    // paddingHorizontal: 16,
     width: screenWidth,
   },
   headerWrapper: {
